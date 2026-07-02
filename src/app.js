@@ -4,6 +4,10 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const startInterviewReminderJob = require("./jobs/interviewReminderJob");
 
+//swagger
+const swaggerUI = require("swagger-ui-express");
+const swaggerSpec = require("./config/swagger");
+
 const authRoutes = require('./routes/authRoutes');
 const applicationRoutes = require('./routes/applicationRoutes');
 
@@ -21,6 +25,8 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors());
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 // Routes
 app.get("/", (req, res) => {
