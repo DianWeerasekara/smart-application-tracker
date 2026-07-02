@@ -33,10 +33,31 @@ const deleteApplication = async (id, userId) => {
   });
 };
 
+const getAllApplications = async() => {
+    return await Application.find()
+        .populate("user_id", "first_name last_name email")
+        .sort({ createdAt: -1});
+}
+
+const getApplicationsByStatus = async (userId, role, status) => {
+  if (role === "admin") {
+    return await Application.find({ status })
+      .populate("user_id", "first_name last_name email")
+      .sort({ createdAt: -1 });
+  }
+
+  return await Application.find({
+    user_id: userId,
+    status,
+  }).sort({ createdAt: -1 });
+};
+
 module.exports = {
   createApplication,
   getApplications,
   getApplicationById,
   updateApplication,
   deleteApplication,
+  getAllApplications,
+  getApplicationsByStatus
 };
