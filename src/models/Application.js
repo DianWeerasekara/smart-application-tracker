@@ -121,10 +121,6 @@ const applicationSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    
-    interview_date: {
-      type: Date,
-    },
 
     interview_reminder_sent: {
       type: Boolean,

@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/db');
+const startInterviewReminderJob = require("./jobs/interviewReminderJob");
 
 const authRoutes = require('./routes/authRoutes');
 const applicationRoutes = require('./routes/applicationRoutes');
@@ -11,6 +12,9 @@ dotenv.config();
 
 // Connect to mongoDB
 connectDB();
+
+// email reminder 
+startInterviewReminderJob();
 
 const app = express();
 
