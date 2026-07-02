@@ -8,8 +8,11 @@ export const getApplications = async(userId) => {
     return await Application.find({user_id: userId});
 }
 
-export const getApplicationById = async(applicationId) => {
-    return await Application.findOne({_id: applicationId});
+export const getApplicationById = async(id, userId) => {
+    return await Application.findOne({
+        _id: id,
+        user_id: userId
+    });
 }
 
 export const updateApplication = async(id, userId, applicationData) => {
