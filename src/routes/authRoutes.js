@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const authController = require("../controllers/loginController");
+const loginLimiter  = require("../middleware/rateLimiter");
 
 /**
  * @swagger
@@ -60,6 +61,6 @@ router.post("/register", authController.register);
  *       200:
  *         description: Login successful
  */
-router.post("/login", authController.login);
+router.post("/login",loginLimiter, authController.login);
 
 module.exports = router;

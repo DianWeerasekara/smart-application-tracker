@@ -4,6 +4,9 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const startInterviewReminderJob = require("./jobs/interviewReminderJob");
 
+//App Limiter
+const apiLimiter = require("./middleware/rateLimiter");
+
 //swagger
 const swaggerUI = require("swagger-ui-express");
 const swaggerSpec = require("./config/swagger");
@@ -21,6 +24,7 @@ connectDB();
 startInterviewReminderJob();
 
 const app = express();
+app.use(apiLimiter);
 
 // Middleware
 app.use(express.json());
